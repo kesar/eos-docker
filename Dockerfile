@@ -10,9 +10,9 @@ RUN apt-get update -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y cmake build-essential sudo git libcurl4-openssl-dev libusb-1.0-0-dev openssl ca-certificates curl wget \
     && git clone --recursive https://github.com/eosio/eos --branch $eosbranch --single-branch \
     && cd eos && echo 1 | ./scripts/eosio_build.sh -y && ./scripts/eosio_install.sh \
-    && cd .. && rm -rf eos/* \
+    && cd .. && rm -rf eos \
     && git clone --recursive https://github.com/eosio/eosio.cdt --branch $eoscdtbranch --single-branch \
     && cd eosio.cdt && mkdir build && cd build && cmake .. && make -j8 && make install \
-    && cd .. && rm -rf eosio.cdt/*
+    && cd && rm -rf eosio.cdt
 
 ENTRYPOINT ["/bin/bash"]
